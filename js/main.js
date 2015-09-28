@@ -7,7 +7,7 @@ require.config({
         'draghover': '../vendor/jquery-draghover',
         'jcrop': '../vendor/jcrop/jquery.Jcrop.min',
         'drp-ah5-communicator': '../no.aptoma.plugin-api/js/AH5Communicator',
-        'drp-app-api': '../no.aptoma.plugin-api/js/AppAPI',
+        'drp-app-api': '../no.aptoma.plugin-api/js/PluginAPI',
         'drp-article-communicator': '../no.aptoma.plugin-api/js/ArticleCommunicator',
         'drp-listeners': '../no.aptoma.plugin-api/js/Listeners',
         'drp-app-auth': 'app-auth',
@@ -26,22 +26,22 @@ require.config({
             deps: ['jquery'],
             exports: 'Listeners'
         },
-        'drp-app-api': {
+        'drp-plugin-api': {
             deps: ['jquery', 'postmessage', 'drp-listeners'],
-            exports: 'AppAPI'
+            exports: 'PluginAPI'
         },
         'drp-ah5-communicator': {
             deps: ['jquery', 'postmessage', 'drp-app-api'],
-            exports: 'AppAPI.Editor'
+            exports: 'PluginAPI.Editor'
         },
         'drp-article-communicator': {
             deps: ['jquery', 'postmessage', 'drp-app-api'],
-            exports: 'AppAPI.Article'
+            exports: 'PluginAPI.Article'
         }
     }
 });
 
-require(['app', 'deparam', 'drp-app-api', 'drp-ah5-communicator', 'drp-article-communicator'], function(App, deparam) {
+require(['app', 'deparam', 'drp-plugin-api', 'drp-ah5-communicator', 'drp-article-communicator'], function(App, deparam) {
     'use strict';
 
     if (!window.Drp || !Drp.ImboConfig) {

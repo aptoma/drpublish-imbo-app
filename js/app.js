@@ -2,13 +2,13 @@ define([
     'underscore',
     'jquery',
     'drp-app-auth',
-    'drp-app-api',
+    'drp-plugin-api',
     'translator',
     'imboclient',
     'uploader',
     'meta-editor',
     'image-editor'
-], function(_, $, appAuth, appApi, Translator, Imbo, Uploader, MetaEditor, ImageEditor) {
+], function(_, $, appAuth, pluginApi, Translator, Imbo, Uploader, MetaEditor, ImageEditor) {
     'use strict';
 
     var ImboApp = function(config) {
@@ -85,15 +85,15 @@ define([
         },
 
         initializeEditor: function() {
-            appApi.Editor.initMenu(['simplePluginMenu', 'editContext', 'deleteButton']);
+            pluginApi.Editor.initMenu(['simplePluginMenu', 'editContext', 'deleteButton']);
 
-            appApi.Editor.registerMenuAction({
+            pluginApi.Editor.registerMenuAction({
                 label: this.translate('SELECTED_IMAGE_EDIT_IMAGE'),
                 icon: 'gfx/icons/iconic/vector/svggen.php?file=pen&amp;fill=%231d4e6f',
                 callback: this.editImageInArticle
             });
 
-            appApi.Editor.registerMenuActionGroup({
+            pluginApi.Editor.registerMenuActionGroup({
                 label: 'size',
                 icon: this.baseUrl + '/img/compress.svg',
                 actions: this.getImageResizeActions()
@@ -120,7 +120,7 @@ define([
         resizeSelectedImage: function(options, id, clickedElementId) {
             var floats = ['dp-float-left', 'dp-float-right', 'dp-float-none'];
 
-            appApi.Editor.getHTMLById(id, function(html) {
+            pluginApi.Editor.getHTMLById(id, function(html) {
                 var el  = $(html),
                     img = el.find('img[data-transformations]');
 
@@ -156,10 +156,10 @@ define([
                         JSON.stringify(imgUrl.getTransformations())
                     );
 
-                appApi.Editor.replaceElementById(
+                pluginApi.Editor.replaceElementById(
                     id,
                     el.get(0).outerHTML,
-                    function() { appApi.Editor.markAsActive(id); }
+                    function() { pluginApi.Editor.markAsActive(id); }
                 );
             }.bind(this));
         },
@@ -168,7 +168,7 @@ define([
         onAuthed: function() {
             this.authed = true;
             this.user   = {};
-            appApi.getCurrentUser(this.onUserInfoReceived);
+            pluginApi.getCurrentUser(this.onUserInfoReceived);
         },
 
         // When user info has been received, cache info
@@ -295,7 +295,7 @@ define([
             this.getImageList()
                 .on('scroll', this.onImageListScroll);
 
-            appApi.on('receivedFocus', _.bind(function(e) {
+            pluginApi.on('receivedFocus', _.bind(function(e) {
                 if (e.data.previousPluginName !== 'scanpix') {
                     return;
                 }
@@ -463,7 +463,7 @@ define([
         },
 
         initScanpixUpload: function() {
-            appApi.giveFocus('scanpix');
+            pluginApi.giveFocus('scanpix');
         },
 
         onImageAdded: function(e, image) {
