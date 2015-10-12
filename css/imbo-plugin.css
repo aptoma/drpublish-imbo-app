@@ -278,7 +278,7 @@ button.upload-scanpix-image {
 
 
 .image-list li.restricted {
-    border-color: #f16b52;
+    border-color: #f6a191;
 }
 
 
@@ -360,15 +360,104 @@ button.upload-scanpix-image {
     top: 40px;
     z-index: 200;
     min-height: 150px;
-    width: 205.5%;
+    width: 100%;
+    margin-left: -1px;
     color: #ddd;
-    background: #222;
+    background: #486f89;
     text-align: left;
 }
 
-.meta-info dt {
-    display: none;
+/* Position based on number and window width */
+
+
+/** MEDIA QUERIES **/
+
+
+/* Medium width - default in Dr. Pub: 2 and 2 */
+@media all and (max-width: 546px) and (min-width: 370px) {
+
+    .meta-info {
+        width: 205.5%
+    }
+
+    .image-list li:nth-child(even) .meta-info {
+        left: -105%;
+    }
 }
+
+/* Wide: 3 and 3 */
+@media all and (min-width: 546px) {
+
+    .meta-info {
+        width: 304.5%;
+    }
+
+    .image-list li:nth-child(3n+2) .meta-info {
+        left: -102%;
+    }
+
+    .image-list li:nth-child(3n+3) .meta-info {
+        left: -210%;
+    }
+
+
+}
+
+
+
+
+/* Style content of meta info */
+
+.meta-info p {
+    margin: 10px;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.meta-info dl {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 10px;
+    width: 100%;
+
+}
+.meta-info dt {
+    clear: both;
+    width: 25%;
+    float: left;
+    margin: 10px 0;
+    padding: 2px;
+    border-top: 1px solid #859eae;
+}
+
+.meta-info dd {
+    margin: 10px 0;
+    padding: 2px;
+    width: 70%;
+    float: left;
+    border-top: 1px solid #859eae;
+}
+
+
+/* If restrictions exist: */
+
+.restricted .meta-info {
+    background: #934d40;
+}
+
+.restricted .meta-info dt,
+.restricted .meta-info dd {
+    border-color: #ae8585;
+}
+
+.meta-restrictions {
+    font-weight: 700;
+}
+
+
+
+
+
 
 
 /* Progress bar */
