@@ -700,10 +700,18 @@ define([
                 this.imboApp.exportEmbeddedAsset(markup, options, onDone);
             }.bind(this);
 
+            var defaultWidth = 590;
+            var defaultImageSize = _.find(this.imboApp.config.imageSizes, function(size) { return size.name === 'default' });
+            if (defaultImageSize) {
+                defaultWidth = defaultImageSize.width;
+            } else if (this.imboApp.config.imageSizes.length) {
+                defaultWidth = this.imboApp.config.imageSizes[0].width;
+            }
+
             if (this.selectedElementId) {
                 PluginAPI.Editor.getHTMLById(this.selectedElementId, function (html) {
                     var $asset = $(html);
-                    $asset.find('img').attr('src', this.buildImageUrl().jpg().toString());
+                    $asset.find('img').attr('src', this.buildImageUrl().maxSize({width: defaultWidth}).jpg().toString());
                     insertMarkup($asset[0].outerHTML, {
                         imboOptions: {
                             imageIdentifier: this.imageIdentifier,
@@ -716,16 +724,6 @@ define([
                     });
                 }.bind(this));
             } else {
-                var defaultWidth;
-                var defaultImageSize = _.find(this.imboApp.config.imageSizes, function(size) { return size.name === 'default' });
-                if (defaultImageSize) {
-                    defaultWidth = defaultImageSize.width;
-                } else if(this.imboApp.config.imageSizes.length) {
-                    defaultWidth = this.imboApp.config.imageSizes[0].width;
-                } else {
-                    defaultWidth = 590;
-                }
-
                 var options = {
                     embeddedTypeId: this.embeddedTypeId,
                     externalId: this.imageIdentifier,
