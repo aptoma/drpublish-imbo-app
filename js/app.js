@@ -823,6 +823,7 @@ define([
                 options: options.imboOptions
             };
             PluginAPI.Editor.insertEmbeddedAsset(markup, data, callback);
+            return data;
         },
 
         exportAssetImage: function (options, callback) {

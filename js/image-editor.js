@@ -694,10 +694,10 @@ define([
                 var onDone = function () {
                     PluginAPI.hideLoader();
                     this.hide();
-                    PluginAPI.Editor.markAsActive(this.selectedElementId);
-                    this.onEditorSelectImage(this.selectedElementId, options.imboOptions);
+                    PluginAPI.Editor.markAsActive(options.internalId);
+                    this.onEditorSelectImage(options.internalId, options.options);
                 }.bind(this);
-                this.imboApp.exportEmbeddedAsset(markup, options, onDone);
+                options = this.imboApp.exportEmbeddedAsset(markup, options, onDone);
             }.bind(this);
 
             var defaultWidth = 590;
