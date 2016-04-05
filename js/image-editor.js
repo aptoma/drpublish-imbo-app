@@ -711,19 +711,27 @@ define([
             if (this.selectedElementId) {
                 PluginAPI.Editor.getHTMLById(this.selectedElementId, function (html) {
                     var $asset = $(html);
-                    $asset.find('img').attr('src', this.buildImageUrl().maxSize({width: defaultWidth}).jpg().toString());
-                    insertMarkup($asset[0].innerHTML, {
-                        imboOptions: {
-                            imageIdentifier: this.imageIdentifier,
-                            user: this.getUser(),
-                            externalId: this.imageIdentifier,
-                            cropParams: this.cropParams,
-                            cropRatio: this.cropAspectRatio,
-                            transformations: this.buildImageUrl().getTransformations()
-                        }
-                    });
+                    if ($asset.length) {
+                        $asset.find('img').attr('src', this.buildImageUrl().maxSize({width: defaultWidth}).jpg().toString());
+                        insertMarkup($asset[0].innerHTML, {
+                            imboOptions: {
+                                imageIdentifier: this.imageIdentifier,
+                                user: this.getUser(),
+                                externalId: this.imageIdentifier,
+                                cropParams: this.cropParams,
+                                cropRatio: this.cropAspectRatio,
+                                transformations: this.buildImageUrl().getTransformations()
+                            }
+                        });
+                    } else {
+                        insertNewEmbed.bind(this)();
+                    }
                 }.bind(this));
             } else {
+                insertNewEmbed.bind(this)();
+            }
+
+            function insertNewEmbed() {
                 var options = {
                     embeddedTypeId: this.embeddedTypeId,
                     externalId: this.imageIdentifier,
@@ -747,7 +755,6 @@ define([
                 };
                 insertMarkup(template(options), options);
             }
-
         },
 
         insertAssetImage: function () {
