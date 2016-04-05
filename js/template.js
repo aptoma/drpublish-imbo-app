@@ -7,7 +7,7 @@ define(['underscore'], function (_) {
         '   <div class="dp-article-image-title" data-dp-editable-type="textfield" data-dp-editable-name="Title"><%- imboOptions.title %></div>',
         '   <div class="dp-article-image-description" data-dp-editable-type="html" data-dp-editable-name="Description"><%- imboOptions.description %></div>',
         '   <div class="dp-article-image-byline">',
-        '     <span class="dp-article-image-author" data-dp-editable-type="textfield" data-dp-editable-name="Author"><%- imboOptions.author %></span>',
+        '     <span class="dp-article-image-author" data-dp-editable-type="textfield" data-dp-editable-name="Author">Foto: <%- imboOptions.author %></span>',
         '     <span class="dp-article-image-source" data-dp-editable-type="textfield" data-dp-editable-name="Source"><%- imboOptions.source %></span>',
         '    </div>',
         '</div>',
