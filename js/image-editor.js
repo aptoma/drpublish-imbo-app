@@ -712,7 +712,7 @@ define([
                 PluginAPI.Editor.getHTMLById(this.selectedElementId, function (html) {
                     var $asset = $(html);
                     $asset.find('img').attr('src', this.buildImageUrl().maxSize({width: defaultWidth}).jpg().toString());
-                    insertMarkup($asset[0].outerHTML, {
+                    insertMarkup($asset[0].innerHTML, {
                         imboOptions: {
                             imageIdentifier: this.imageIdentifier,
                             user: this.getUser(),
