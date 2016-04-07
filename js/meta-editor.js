@@ -21,6 +21,7 @@ define([
             this.tabCtrl = $('.tab-controller');
             this.exifPane = $('.exif-pane');
             this.inputPane = $('.input-pane');
+            this.settingsHeader = $('.settings-header');
             this.imageBox = this.editorPane.find('.image-container');
             this.imageView = this.imageBox.find('.source');
             this.events = $({});
@@ -219,7 +220,7 @@ define([
 
             var callback = function () {
                 PluginAPI.hideLoader();
-                this.hide();
+                this.settingsHeader.find('button[data-ref=image]').click();
             }.bind(this);
 
             this.imbo.editMetadata(

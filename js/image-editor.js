@@ -740,28 +740,31 @@ define([
             }
 
             function insertNewEmbed() {
-                var options = {
-                    embeddedTypeId: this.embeddedTypeId,
-                    externalId: this.imageIdentifier,
-                    assetClass: this.imageClassName,
-                    resourceUri: this.buildImageUrl().jpg().toString(),
-                    previewUri: this.buildImageUrl().maxSize({width: defaultWidth}).jpg().toString(),
-                    previewWidth: defaultWidth,
-                    renditions: this.buildRenditions(),
-                    imboOptions: {
-                        imageIdentifier: this.imageIdentifier,
-                        user: this.getUser(),
+                this.imbo.getMetadata(this.imageIdentifier, function (err, data) {
+                    this.imageMetadata = data;
+                    var options = {
+                        embeddedTypeId: this.embeddedTypeId,
                         externalId: this.imageIdentifier,
-                        title: this.imageMetadata['title'] || '',
-                        description: this.imageMetadata['description'] || '',
-                        author: this.imageMetadata['byline'] || '',
-                        source: this.imageMetadata['credit'] || '',
-                        cropParams: this.cropParams,
-                        cropRatio: this.cropAspectRatio,
-                        transformations: this.buildImageUrl().getTransformations()
-                    }
-                };
-                insertMarkup(template(options), options);
+                        assetClass: this.imageClassName,
+                        resourceUri: this.buildImageUrl().jpg().toString(),
+                        previewUri: this.buildImageUrl().maxSize({width: defaultWidth}).jpg().toString(),
+                        previewWidth: defaultWidth,
+                        renditions: this.buildRenditions(),
+                        imboOptions: {
+                            imageIdentifier: this.imageIdentifier,
+                            user: this.getUser(),
+                            externalId: this.imageIdentifier,
+                            title: this.imageMetadata['title'] || '',
+                            description: this.imageMetadata['description'] || '',
+                            author: this.imageMetadata['byline'] || '',
+                            source: this.imageMetadata['credit'] || '',
+                            cropParams: this.cropParams,
+                            cropRatio: this.cropAspectRatio,
+                            transformations: this.buildImageUrl().getTransformations()
+                        }
+                    };
+                    insertMarkup(template(options), options);
+                }.bind(this));
             }
         },
 
