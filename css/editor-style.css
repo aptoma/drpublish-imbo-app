@@ -6,3 +6,14 @@
 .dp-picture.dp-plugin-imbo img {
     max-width: 100%;
 }
+
+.dp-picture.dp-plugin-imbo .dp-article-image-title,
+.dp-picture.dp-plugin-imbo .dp-article-image-description,
+.dp-picture.dp-plugin-imbo .dp-article-image-description p,
+.dp-picture.dp-plugin-imbo .dp-article-image-byline {
+    line-height: 1.5em;
+}
+
+.dp-picture.dp-plugin-imbo .dp-article-image-title:empty {
+    display: none;
+}
