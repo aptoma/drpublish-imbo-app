@@ -561,6 +561,14 @@ define([
         },
 
         onImageLoaded: function () {
+            if (!this.cropParams) {
+                this.cropParams = {
+                    x: 0,
+                    y: 0,
+                    x2: this.originalImageSize.width,
+                    y2: this.originalImageSize.height
+                };
+            }
             this.setCropper(this.cropParams);
 
             var waitForIt = setInterval(_.bind(function() {
