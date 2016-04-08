@@ -49,6 +49,7 @@ define([
             this.poi = {x: 0, y: 0};
             this.embeddedTypeId = null;
             this.events = $({});
+            this.setEditMode(false);
             this.initEmbeddedTypeId();
             this.initTransformations();
             this.initRatioPickers();
