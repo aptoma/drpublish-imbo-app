@@ -986,7 +986,11 @@ button.upload-scanpix-image {
 
 
 /* META EDITING - within .settings-tab .meta */
-
+div.insert-warning {
+    text-align: center;
+    color: #e84648;
+    padding: 0 15px 0 15px;
+}
 
 
 /* Styling list of exif data: */

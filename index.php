@@ -172,7 +172,7 @@
                         <section class="exif-pane tab hidden" data-tab="exif">
                             &nbsp;
                         </section>
-
+                                <div class="insert-warning"></div>
                                 <div class="buttons">
                                     <button class="close"><i class="fa fa-times"></i> <span data-translate="IMAGE_EDITOR_CANCEL_BUTTON"></span></button>
                                     <button class="save"><i class="fa fa-save"></i> <span data-translate="META_EDITOR_SAVE_META_DATA"></span></button>

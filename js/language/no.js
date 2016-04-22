@@ -39,6 +39,7 @@ define(['underscore', 'language/en'], function(_, english) {
         'META_EDITOR_LOADING_METADATA': 'Laster bildeinformasjon...',
         'META_EDITOR_CORE_TAB': 'Enkel metadata',
         'META_EDITOR_EXIF_TAB': 'Exif metadata',
+        'META_EDITOR_INSERT_WARNING': "Du har ikke valgt en gyldig plassering for bildet. Dette vinduet vil lukkes etter metadata er lagret.",
 
         // Image editor
         'IMAGE_EDITOR_TITLE': 'Bilderedigering',

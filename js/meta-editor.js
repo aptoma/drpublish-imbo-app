@@ -24,6 +24,7 @@ define([
             this.settingsHeader = $('.settings-header');
             this.imageBox = this.editorPane.find('.image-container');
             this.imageView = this.imageBox.find('.source');
+            this.insertWarning = $('.insert-warning');
             this.events = $({});
             this.bindEvents();
             this.imboApp = imboApp;
@@ -74,6 +75,12 @@ define([
                 .removeClass('active');
 
             el.addClass('active');
+
+            if (!this.imboApp.insertionEnabled) {
+                this.insertWarning.text(this.translator.translate('META_EDITOR_INSERT_WARNING'));
+            } else {
+                this.insertWarning.text('');
+            }
         },
 
         imboApp: null,
@@ -220,7 +227,11 @@ define([
 
             var callback = function () {
                 PluginAPI.hideLoader();
-                this.settingsHeader.find('button[data-ref=image]').click();
+                if (this.imboApp.insertionEnabled) {
+                    this.settingsHeader.find('button[data-ref=image]').click();
+                } else {
+                    this.hide();
+                }
             }.bind(this);
 
             this.imbo.editMetadata(

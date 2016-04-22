@@ -40,6 +40,7 @@ define([], function() {
         'META_EDITOR_LOADING_METADATA': 'Loading metadata...',
         'META_EDITOR_CORE_TAB': 'Basic metadata',
         'META_EDITOR_EXIF_TAB': 'Exif metadata',
+        'META_EDITOR_INSERT_WARNING': "You haven't chosen a valid placement for this image. The editor will close after saving metadata.",
 
         // Image editor
         'IMAGE_EDITOR_TITLE': 'Image editor',
