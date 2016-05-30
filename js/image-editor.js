@@ -717,56 +717,31 @@ define([
                 defaultWidth = this.imboApp.config.imageSizes[0].width;
             }
 
-            if (this.selectedElementId) {
-                PluginAPI.Editor.getHTMLById(this.selectedElementId, function (html) {
-                    var $asset = $(html);
-                    if ($asset.length) {
-                        $asset.find('img').attr('src', this.buildImageUrl().maxSize({width: defaultWidth}).jpg().toString());
-                        insertMarkup($asset[0].innerHTML, {
-                            imboOptions: {
-                                imageIdentifier: this.imageIdentifier,
-                                user: this.getUser(),
-                                externalId: this.imageIdentifier,
-                                cropParams: this.cropParams,
-                                cropRatio: this.cropAspectRatio,
-                                transformations: this.buildImageUrl().getTransformations()
-                            }
-                        });
-                    } else {
-                        insertNewEmbed.bind(this)();
-                    }
-                }.bind(this));
-            } else {
-                insertNewEmbed.bind(this)();
-            }
-
-            function insertNewEmbed() {
-                this.imbo.getMetadata(this.imageIdentifier, function (err, data) {
-                    this.imageMetadata = data;
-                    var options = {
-                        embeddedTypeId: this.embeddedTypeId,
+            this.imbo.getMetadata(this.imageIdentifier, function (err, data) {
+                this.imageMetadata = data;
+                var options = {
+                    embeddedTypeId: this.embeddedTypeId,
+                    externalId: this.imageIdentifier,
+                    assetClass: this.imageClassName,
+                    resourceUri: this.buildImageUrl().jpg().toString(),
+                    previewUri: this.buildImageUrl().maxSize({width: defaultWidth}).jpg().toString(),
+                    previewWidth: defaultWidth,
+                    renditions: this.buildRenditions(),
+                    imboOptions: {
+                        imageIdentifier: this.imageIdentifier,
+                        user: this.getUser(),
                         externalId: this.imageIdentifier,
-                        assetClass: this.imageClassName,
-                        resourceUri: this.buildImageUrl().jpg().toString(),
-                        previewUri: this.buildImageUrl().maxSize({width: defaultWidth}).jpg().toString(),
-                        previewWidth: defaultWidth,
-                        renditions: this.buildRenditions(),
-                        imboOptions: {
-                            imageIdentifier: this.imageIdentifier,
-                            user: this.getUser(),
-                            externalId: this.imageIdentifier,
-                            title: this.imageMetadata['title'] || '',
-                            description: this.imageMetadata['description'] || '',
-                            author: this.imageMetadata['byline'] || '',
-                            source: this.imageMetadata['credit'] || '',
-                            cropParams: this.cropParams,
-                            cropRatio: this.cropAspectRatio,
-                            transformations: this.buildImageUrl().getTransformations()
-                        }
-                    };
-                    insertMarkup(template(options), options);
-                }.bind(this));
-            }
+                        title: this.imageMetadata['title'] || '',
+                        description: this.imageMetadata['description'] || '',
+                        author: this.imageMetadata['byline'] || '',
+                        source: this.imageMetadata['credit'] || '',
+                        cropParams: this.cropParams,
+                        cropRatio: this.cropAspectRatio,
+                        transformations: this.buildImageUrl().getTransformations()
+                    }
+                };
+                insertMarkup(template(options), options);
+            }.bind(this));
         },
 
         insertAssetImage: function () {
