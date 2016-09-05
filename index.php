@@ -226,6 +226,11 @@
 
                 <dt class="meta-scanpix-id">Scanpix-ID</dt>
                 <dd class="meta-scanpix-id">#scanpix-id</dd>
+
+                <dt class="meta-fullsize">Full størrelse:</dt>
+                <dd class="meta-fullsize"><input type="text"     value="#fullsize-url"/></dd>
+
+                #additional-sizes
             </dl>
         </div>
 

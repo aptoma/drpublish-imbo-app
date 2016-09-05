@@ -458,6 +458,7 @@ button.upload-scanpix-image {
 
 /* Display/hide dt/dds depending on whether they have info */
 
+.meta-info .show,
 .meta-info.restrictions .meta-restrictions,
 .meta-info.caption .meta-caption,
 .meta-info.date .meta-date,
@@ -465,9 +466,21 @@ button.upload-scanpix-image {
 .meta-info.scanpix-id .meta-scanpix-id,
 .meta-info.credit .meta-credit,
 .meta-info.credit-vg .meta-credit,
-.meta-info.credit-none .meta-credit {
+.meta-info.credit-none .meta-credit,
+.meta-info.fullsize .meta-fullsize {
     display: inline-block;
+    margin: 0;
 }
+
+.meta-info input[type=text] {
+    border: none;
+    background: inherit;
+    box-shadow: none;
+    color: inherit;
+    font-size: inherit;
+    padding: 0;
+    margin: 0;
+};
 
 
 /* If restrictions exist, color box red: */

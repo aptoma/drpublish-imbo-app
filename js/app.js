@@ -666,6 +666,30 @@ define([
 
             var className = [];
 
+            className.push('fullsize');
+            toolbar = toolbar.replace(/\#fullsize-url/, imageUrl);
+
+            ImboApp.DEFAULT_IMAGE_SIZES.forEach(function(size) {
+                // Get the transformations applied to the image
+                var imgUrl = this.imbo.parseImageUrl(imageUrl),
+                    transformations = imgUrl.getTransformations();
+
+                // Reset to contain no transformations
+                imgUrl.reset();
+
+                // Re-apply all transformations except any maxSize
+                transformations.filter(function (t) {
+                    return t.indexOf('maxSize') !== 0;
+                }).map(imgUrl.append, imgUrl);
+
+                // Apply new image size
+                imgUrl.maxSize({width: size.width});
+                var insert = '<dt class="show">' + size.name + '</dt><dd class="show"><input type="text" value="' + imgUrl.toString() + '"></dd>#additional-sizes';
+                toolbar = toolbar.replace(/\#additional-sizes/, insert);
+            }.bind(this));
+
+            toolbar = toolbar.replace(/\#additional-sizes/, '');
+
             if (_.get(image, 'metadata.scanpix.restrictions')) {
                 className.push('restrictions');
                 toolbar = toolbar.replace(/\#restriction-text/, image.metadata.scanpix.restrictions);
