@@ -42,6 +42,28 @@ define([
         }
     ];
 
+    // Sizes for the download links in the info-dropdown for each image
+    ImboApp.ADDITIONAL_SIZES = [
+        {
+            'name': 'large',
+            'width': 988
+        },
+        {
+            'name': 'default',
+            'width': 590
+        }, {
+            'name': 'small',
+            'width': 270
+        }, {
+            'name': 'panorama',
+            'width': 590,
+            'height': 295
+        }, {
+            'name': 'x-small',
+            'width': 100
+        }
+    ];
+
     _.extend(ImboApp.prototype, {
 
         AppName: 'imbo-images',
@@ -669,7 +691,7 @@ define([
             className.push('fullsize');
             toolbar = toolbar.replace(/\#fullsize-url/, imageUrl);
 
-            ImboApp.DEFAULT_IMAGE_SIZES.forEach(function(size) {
+            ImboApp.ADDITIONAL_SIZES.forEach(function(size) {
                 // Get the transformations applied to the image
                 var imgUrl = this.imbo.parseImageUrl(imageUrl),
                     transformations = imgUrl.getTransformations();
@@ -683,7 +705,11 @@ define([
                 }).map(imgUrl.append, imgUrl);
 
                 // Apply new image size
-                imgUrl.maxSize({width: size.width});
+                if (size.height) {
+                    imgUrl.maxSize({width: size.width, height: size.height});
+                } else {
+                    imgUrl.maxSize({width: size.width});
+                }
                 var insert = '<dt class="show">' + size.name + '</dt><dd class="show"><input type="text" value="' + imgUrl.toString() + '"></dd>#additional-sizes';
                 toolbar = toolbar.replace(/\#additional-sizes/, insert);
             }.bind(this));
